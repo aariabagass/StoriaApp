@@ -30,12 +30,11 @@
             android:name=".ui.home.AddStoryActivity"
             android:exported="false" /> <!-- Splash is LAUNCHER -->
         <activity
-            android:name=".ui.welcome.SplashActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.StoriaApp">
+            android:theme="@style/Theme.StoriaApp.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- Login -->

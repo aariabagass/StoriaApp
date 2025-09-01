@@ -49,5 +49,10 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.StoriaApp.Dialog</item>
         <item name="snackbarStyle">@style/Widget.StoriaApp.Snackbar</item>
     </style>
+    <style name="Theme.StoriaApp.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenBackground">@color/bg_surface</item>
+        <item name="postSplashScreenTheme">@style/Theme.StoriaApp</item>
+    </style>
 </resources>
 

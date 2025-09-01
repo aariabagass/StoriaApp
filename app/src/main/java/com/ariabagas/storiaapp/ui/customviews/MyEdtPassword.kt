@@ -1,5 +1,6 @@
 package com.ariabagas.storiaapp.ui.customviews
 
+import com.ariabagas.storiaapp.R
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,7 +20,7 @@ class MyEdtPassword(context: Context, attrs: AttributeSet) : AppCompatEditText(c
                 val parentLayout = parent.parent
                 if (parentLayout is TextInputLayout) {
                     if (password.isNotEmpty() && password.length < 8) {
-                        parentLayout.error = "Password must be at least 8 characters"
+                        parentLayout.error = context.getString(R.string.pass_req)
                     } else {
                         parentLayout.error = null
                     }

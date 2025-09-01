@@ -11,6 +11,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.ariabagas.storiaapp.databinding.ActivityAddStoryBinding
 import com.ariabagas.storiaapp.data.local.datastore.UserPreference
@@ -67,7 +69,17 @@ class AddStoryActivity : ComponentActivity() {
         enableEdgeToEdge()
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
+            insets
+        }
+        
         binding.btnGallery.setOnClickListener {
             launcherGallery.launch("image/*")
         }

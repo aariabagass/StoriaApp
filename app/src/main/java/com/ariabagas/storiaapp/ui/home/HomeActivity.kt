@@ -4,12 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ariabagas.storiaapp.R
 import com.ariabagas.storiaapp.databinding.ActivityHomeBinding
 import com.ariabagas.storiaapp.data.local.datastore.UserPreference
 import com.ariabagas.storiaapp.ui.welcome.LoginActivity
@@ -22,7 +25,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeActivity : ComponentActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-
     private val prefs: UserPreference by inject()
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var adapter: StoryAdapter
@@ -51,6 +53,16 @@ class HomeActivity : ComponentActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
+            insets
+        }
 
         adapter = StoryAdapter()
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -76,7 +88,8 @@ class HomeActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             adapter.loadStateFlow.collect { loadStates ->
-                binding.swipeRefresh.isRefreshing = loadStates.refresh is androidx.paging.LoadState.Loading
+                binding.swipeRefresh.isRefreshing =
+                    loadStates.refresh is androidx.paging.LoadState.Loading
                 val isNotLoading = loadStates.refresh is androidx.paging.LoadState.NotLoading
                 val hasItems = adapter.itemCount > 0
                 if (isNotLoading && hasItems) {
@@ -110,10 +123,13 @@ class HomeActivity : ComponentActivity() {
             val intent = Intent(this, AddStoryActivity::class.java)
             launcherAddStory.launch(intent)
         }
-    }
 
-    override fun onBackPressed() {
-        finishAffinity()
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finishAffinity()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 }
 

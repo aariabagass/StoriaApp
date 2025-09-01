@@ -21,12 +21,16 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
         }
     }
     compileOptions {
@@ -62,6 +66,7 @@ dependencies {
     implementation(libs.camera.lifecycle)           // CameraX lifecycle-aware
     implementation(libs.camera.view)                // CameraX preview/view
     implementation(libs.swiperefresh)               // Pull-to-refresh
+    implementation(libs.androidx.core.splashscreen)
 
     // --- Room (Local Database) ---
     implementation(libs.room.runtime)               // Room runtime

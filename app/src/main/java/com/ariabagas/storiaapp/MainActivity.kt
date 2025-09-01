@@ -1,27 +1,29 @@
-package com.ariabagas.storiaapp.ui.welcome
+package com.ariabagas.storiaapp
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.ariabagas.storiaapp.data.local.datastore.UserPreference
-import com.ariabagas.storiaapp.databinding.ActivitySplashBinding
 import com.ariabagas.storiaapp.ui.home.HomeActivity
+import com.ariabagas.storiaapp.ui.welcome.LoginActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-@SuppressLint("CustomSplashScreen")
-class SplashActivity : ComponentActivity() {
-    private lateinit var binding: ActivitySplashBinding
+class MainActivity : ComponentActivity() {
 
     private val prefs: UserPreference by inject()
+    @Volatile
+    private var isLoading = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+        splashScreen.setKeepOnScreenCondition { isLoading }
 
         CoroutineScope(Dispatchers.IO).launch {
             val token = prefs.getToken()
@@ -31,7 +33,8 @@ class SplashActivity : ComponentActivity() {
                 HomeActivity::class.java
             }
 
-            startActivity(Intent(this@SplashActivity, destination).apply {
+            isLoading = false
+            startActivity(Intent(this@MainActivity, destination).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             })
             finish()

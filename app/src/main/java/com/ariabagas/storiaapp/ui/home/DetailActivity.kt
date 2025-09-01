@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.ariabagas.storiaapp.databinding.ActivityDetailBinding
 import org.koin.android.ext.android.inject
@@ -27,7 +28,16 @@ class DetailActivity : ComponentActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
+            insets
+        }
 
         val storyId = intent.getStringExtra(EXTRA_ID) ?: return
         ViewCompat.setTransitionName(binding.ivStory, "photo_$storyId")
