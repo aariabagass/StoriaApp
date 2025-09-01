@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- =================================================================== -->
+
+    <!-- TYPO ROBOTO                                                         -->
+
+    <!-- =================================================================== -->
+
+    <!-- Base TextAppearance Style -->
+    <style name="Type.StoriaApp" parent="android:TextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Display -->
+    <style name="Type.StoriaApp.Display" parent="Type.StoriaApp">
+        <item name="android:textSize">48sp</item>
+        <item name="lineHeight">56sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Headline 1 -->
+    <style name="Type.StoriaApp.Headline.Lg" parent="Type.StoriaApp">
+        <item name="android:textSize">32sp</item>
+        <item name="lineHeight">40sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Headline 2 -->
+    <style name="Type.StoriaApp.Headline.Md" parent="Type.StoriaApp">
+        <item name="android:textSize">24sp</item>
+        <item name="lineHeight">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Title -->
+    <style name="Type.StoriaApp.Title" parent="Type.StoriaApp">
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">28sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- Subtitle -->
+    <style name="Type.StoriaApp.Subtitle" parent="Type.StoriaApp">
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
+    </style>
+
+    <!-- Body 1 -->
+    <style name="Type.StoriaApp.Body.Lg" parent="Type.StoriaApp">
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
+    </style>
+
+    <!-- Body 2 -->
+    <style name="Type.StoriaApp.Body.Md" parent="Type.StoriaApp">
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">20sp</item>
+    </style>
+
+    <!-- Button -->
+    <style name="Type.StoriaApp.Button" parent="Type.StoriaApp">
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">20sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- Caption -->
+    <style name="Type.StoriaApp.Caption" parent="Type.StoriaApp">
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">16sp</item>
+    </style>
+
+    <!-- Overline -->
+    <style name="Type.StoriaApp.Overline" parent="Type.StoriaApp">
+        <item name="android:textSize">10sp</item>
+        <item name="lineHeight">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+</resources>

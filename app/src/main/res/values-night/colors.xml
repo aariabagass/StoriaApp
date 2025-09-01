@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- =================================================================== -->
+
+    <!-- NIGHT                                                               -->
+
+    <!-- =================================================================== -->
+    <!-- Brand Aliases -->
+    <color name="primary">@color/primary_300</color>
+    <color name="on_primary">@color/primary_900</color>
+    <color name="primary_container">@color/primary_800</color>
+    <color name="on_primary_container">@color/primary_100</color>
+
+    <color name="secondary">@color/secondary_300</color>
+    <color name="on_secondary">@color/secondary_900</color>
+    <color name="secondary_container">@color/secondary_800</color>
+    <color name="on_secondary_container">@color/secondary_100</color>
+
+    <color name="tertiary">@color/tertiary_300</color>
+    <color name="on_tertiary">@color/tertiary_900</color>
+    <color name="tertiary_container">@color/tertiary_800</color>
+    <color name="on_tertiary_container">@color/tertiary_100</color>
+
+    <!-- Status Aliases -->
+    <color name="success">#52C46A</color>
+    <color name="on_success">@color/neutral_900</color>
+    <color name="warning">#FFCA28</color>
+    <color name="on_warning">@color/neutral_900</color>
+    <color name="error">#FF8A80</color>
+    <color name="on_error">@color/neutral_900</color>
+    <color name="info">#4FC3F7</color>
+    <color name="on_info">@color/neutral_900</color>
+
+    <!-- =================================================================== -->
+    <!-- Semantic Mappings (Dark Theme)                                      -->
+    <!-- =================================================================== -->
+    <!-- Background -->
+    <color name="bg_primary">@color/primary</color>
+    <color name="bg_surface">@color/neutral_900</color>
+    <color name="bg_surface_variant">@color/neutral_800</color>
+    <color name="bg_elevated_1">#2C293A</color> <!-- Surface + 5% primary overlay -->
+    <color name="bg_elevated_2">#2F2C41</color> <!-- Surface + 8% primary overlay -->
+    <color name="bg_elevated_3">#322E47</color> <!-- Surface + 11% primary overlay -->
+    <color name="bg_elevated_4">#332F4A</color> <!-- Surface + 12% primary overlay -->
+    <color name="bg_elevated_5">#363150</color> <!-- Surface + 14% primary overlay -->
+
+    <!-- Text -->
+    <color name="text_primary">@color/neutral_50</color>
+    <color name="text_secondary">@color/neutral_300</color>
+    <color name="text_tertiary">@color/neutral_400</color>
+    <color name="text_disabled">@color/neutral_600</color>
+    <color name="text_on_primary">@color/on_primary</color>
+    <color name="text_on_secondary">@color/on_secondary</color>
+    <color name="text_on_tertiary">@color/on_tertiary</color>
+    <color name="text_error">@color/error</color>
+
+    <!-- Stroke -->
+    <color name="stroke_primary">@color/primary</color>
+    <color name="stroke_divider">@color/neutral_800</color>
+    <color name="stroke_outline">@color/neutral_400</color>
+    <color name="stroke_focus">@color/primary_200</color>
+    <color name="stroke_error">@color/error</color>
+
+    <!-- Icon -->
+    <color name="icon_primary">@color/primary</color>
+    <color name="icon_secondary">@color/neutral_200</color>
+    <color name="icon_muted">@color/neutral_400</color>
+    <color name="icon_disabled">@color/neutral_600</color>
+    <color name="icon_on_primary">@color/on_primary</color>
+
+</resources>

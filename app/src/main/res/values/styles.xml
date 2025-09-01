@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- =================================================================== -->
+
+    <!-- Component Styles                                                    -->
+
+    <!-- =================================================================== -->
+
+    <!-- Buttons -->
+    <style name="Widget.StoriaApp.Button.Base" parent="Widget.Material3.Button">
+        <item name="android:textAppearance">@style/Type.StoriaApp.Button</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.StoriaApp.Small</item>
+    </style>
+
+    <style name="Widget.StoriaApp.Button.Filled" parent="Widget.StoriaApp.Button.Base">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/text_on_primary</item>
+    </style>
+
+    <style name="Widget.StoriaApp.Button.Tonal" parent="Widget.Material3.Button">
+        <item name="android:textAppearance">@style/Type.StoriaApp.Button</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.StoriaApp.Pill</item>
+        <item name="android:backgroundTint">@color/tertiary</item>
+        <item name="android:textColor">@color/on_primary</item>
+    </style>
+
+    <style name="Widget.StoriaApp.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textAppearance">@style/Type.StoriaApp.Button</item>
+        <item name="strokeColor">@color/stroke_outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.StoriaApp.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAppearance">@style/Type.StoriaApp.Button</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.StoriaApp.Pill</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <!-- Text Input Layout -->
+    <style name="Widget.StoriaApp.TextInputLayout.Base" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.StoriaApp.Small</item>
+        <item name="boxStrokeColor">@color/textinput_stroke</item>
+        <item name="hintTextColor">@color/primary</item>
+    </style>
+
+    <style name="Widget.StoriaApp.TextInputLayout.Filled" parent="Widget.StoriaApp.TextInputLayout.Base" />
+
+    <style name="Widget.StoriaApp.TextInputLayout.Outlined" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.StoriaApp.Small</item>
+        <item name="boxStrokeColor">@color/textinput_stroke</item>
+        <item name="hintTextColor">@color/primary</item>
+    </style>
+
+    <!-- Chips -->
+    <style name="Widget.StoriaApp.Chip.Assist" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/bg_surface_variant</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="chipIconTint">@color/icon_secondary</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.StoriaApp.Small</item>
+    </style>
+
+    <!-- Selection Controls -->
+    <style name="Widget.StoriaApp.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/primary</item>
+    </style>
+
+    <style name="Widget.StoriaApp.RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/primary</item>
+    </style>
+
+    <style name="Widget.StoriaApp.Switch" parent="Widget.Material3.CompoundButton.Switch">
+    </style>
+
+    <!-- Card -->
+    <style name="Widget.StoriaApp.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/bg_surface_variant</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.StoriaApp.Medium</item>
+    </style>
+
+    <!-- Dialog -->
+    <style name="ThemeOverlay.StoriaApp.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">@color/bg_elevated_3</item>
+        <item name="materialAlertDialogTitleTextStyle">
+            @style/MaterialAlertDialog.StoriaApp.Title.Text
+        </item>
+        <item name="materialAlertDialogBodyTextStyle">
+            @style/MaterialAlertDialog.StoriaApp.Body.Text
+        </item>
+    </style>
+
+    <style name="MaterialAlertDialog.StoriaApp.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
+        <item name="android:textAppearance">@style/Type.StoriaApp.Title</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="MaterialAlertDialog.StoriaApp.Body.Text" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textAppearance">@style/Type.StoriaApp.Body.Md</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- Snackbar -->
+    <style name="Widget.StoriaApp.Snackbar" parent="Widget.Material3.Snackbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.StoriaApp.Snackbar</item>
+    </style>
+
+    <style name="ThemeOverlay.StoriaApp.Snackbar" parent="">
+        <item name="colorOnSurface">@color/neutral_50</item>
+        <item name="colorSurface">@color/neutral_800</item>
+    </style>
+
+    <style name="Widget.StoriaApp.FAB.Primary" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.StoriaApp.Pill</item>
+        <item name="backgroundTint">@color/tertiary</item>
+        <item name="tint">@color/text_on_primary</item>
+    </style>
+</resources>
+

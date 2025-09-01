@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- =================================================================== -->
+
+    <!-- LIGHT THEME                                                         -->
+
+    <!-- =================================================================== -->
+    <style name="Theme.StoriaApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Brand Colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+
+        <!-- Surface & Background Colors -->
+        <item name="android:colorBackground">@color/bg_surface</item>
+        <item name="colorSurface">@color/bg_surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/bg_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/stroke_outline</item>
+
+        <!-- Status Colors -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+
+        <!-- System UI -->
+        <item name="android:statusBarColor">@color/bg_surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Default Component Styles -->
+        <item name="materialButtonStyle">@style/Widget.StoriaApp.Button.Filled</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.StoriaApp.Button.Outlined</item>
+        <item name="borderlessButtonStyle">@style/Widget.StoriaApp.Button.Text</item>
+        <item name="textInputStyle">@style/Widget.StoriaApp.TextInputLayout.Filled</item>
+        <item name="chipStyle">@style/Widget.StoriaApp.Chip.Assist</item>
+        <item name="materialCardViewStyle">@style/Widget.StoriaApp.Card</item>
+        <item name="checkboxStyle">@style/Widget.StoriaApp.CheckBox</item>
+        <item name="radioButtonStyle">@style/Widget.StoriaApp.RadioButton</item>
+        <item name="materialSwitchStyle">@style/Widget.StoriaApp.Switch</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.StoriaApp.Dialog</item>
+        <item name="snackbarStyle">@style/Widget.StoriaApp.Snackbar</item>
+    </style>
+</resources>
+
