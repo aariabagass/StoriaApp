@@ -17,6 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        //CHECK MANIFEST FOR MAP KEY
         buildConfigField("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
     }
 

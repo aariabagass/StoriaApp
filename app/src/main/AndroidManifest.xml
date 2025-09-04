@@ -9,6 +9,8 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".MyApp"
@@ -20,15 +22,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StoriaApp">
-        <activity
-            android:name=".ui.home.DetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.home.CameraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.home.AddStoryActivity"
-            android:exported="false" /> <!-- Splash is LAUNCHER -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -37,13 +34,26 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Login -->
+        </activity>
+        <activity
+            android:name=".ui.home.MapStoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.home.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.CameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.AddStoryActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.welcome.LoginActivity"
-            android:exported="false" /> <!-- Register -->
+            android:exported="false" />
         <activity
             android:name=".ui.welcome.RegisterActivity"
-            android:exported="false" /> <!-- Home -->
+            android:exported="false" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false"
@@ -74,5 +84,4 @@
                 android:value="" />
         </service>
     </application>
-
 </manifest>
