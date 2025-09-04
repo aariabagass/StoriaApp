@@ -64,6 +64,7 @@
     <!-- Selection Controls -->
     <style name="Widget.StoriaApp.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
         <item name="buttonTint">@color/primary</item>
+        <item name="android:textAppearance">@style/Type.StoriaApp.Body.Md</item>
     </style>
 
     <style name="Widget.StoriaApp.RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">

@@ -95,6 +95,10 @@ dependencies {
     // --- DataStore (Preferences / Proto) ---
     implementation(libs.androidx.datastore.preferences) // Preferences DataStore
 
+    // --- G Maps ---
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+
     // --- Testing ---
     testImplementation(libs.junit)                  // Unit testing
     androidTestImplementation(libs.androidx.junit)  // AndroidX JUnit extensions

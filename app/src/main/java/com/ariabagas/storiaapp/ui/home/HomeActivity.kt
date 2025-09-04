@@ -12,7 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ariabagas.storiaapp.R
 import com.ariabagas.storiaapp.databinding.ActivityHomeBinding
 import com.ariabagas.storiaapp.data.local.datastore.UserPreference
 import com.ariabagas.storiaapp.ui.welcome.LoginActivity
@@ -106,6 +105,10 @@ class HomeActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+
+        binding.btnMaps.setOnClickListener {
+            startActivity(Intent(this, MapStoryActivity::class.java))
         }
 
         binding.btnLogout.setOnClickListener {

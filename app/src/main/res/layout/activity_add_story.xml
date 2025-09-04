@@ -58,9 +58,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginBottom="16dp"
-        android:hint="description"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpload"
+        android:layout_marginBottom="8dp"
+        android:hint="Description"
+        app:layout_constraintBottom_toTopOf="@+id/cbShareLocation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -73,6 +73,32 @@
             android:lines="3"
             android:maxLines="5" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- ✅ Share location checkbox -->
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbShareLocation"
+        style="@style/Widget.StoriaApp.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:checked="false"
+        android:text="@string/share_my_location"
+        app:layout_constraintBottom_toTopOf="@+id/btnUpload"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/locationProgress"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        app:indicatorDirectionCircular="clockwise"
+        app:indicatorInset="0dp"
+        app:indicatorSize="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cbShareLocation"
+        app:layout_constraintStart_toEndOf="@id/cbShareLocation"
+        app:layout_constraintTop_toTopOf="@+id/cbShareLocation" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnUpload"

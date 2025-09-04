@@ -8,6 +8,7 @@ import com.ariabagas.storiaapp.data.network.services.ApiService
 import kotlinx.coroutines.flow.Flow
 import androidx.paging.PagingData
 import com.ariabagas.storiaapp.data.network.StoryPagingSource
+import com.ariabagas.storiaapp.data.network.responses.StoryItem
 import com.ariabagas.storiaapp.utils.reduceFileImage
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -21,6 +22,16 @@ class HomeRepositoryImpl(private val api: ApiService) : HomeRepository {
             config = PagingConfig(pageSize = 10, enablePlaceholders = false),
             pagingSourceFactory = { StoryPagingSource(api, token) }
         ).flow
+    }
+
+    override suspend fun getStoriesWithLocation(token: String): Result<List<Story>> {
+        return try {
+            val response = api.getStoriesWithLocation("Bearer $token")
+            val stories = response.listStory.map { it.toDomain() }
+            Result.success(stories)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     override suspend fun getStoryDetail(token: String, id: String): Story {
@@ -51,5 +62,36 @@ class HomeRepositoryImpl(private val api: ApiService) : HomeRepository {
 
         val response = api.addStory("Bearer $token", multipartBody, descBody)
         return !response.error
+    }
+
+    override suspend fun addStoryWithLocation(
+        token: String,
+        description: String,
+        photoPath: String,
+        lat: Double,
+        lon: Double
+    ): Boolean {
+        val file = File(photoPath).reduceFileImage()
+        val descBody = description.toRequestBody("text/plain".toMediaType())
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
+        val multipartBody = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
+
+        val latBody = lat.toString().toRequestBody("text/plain".toMediaType())
+        val lonBody = lon.toString().toRequestBody("text/plain".toMediaType())
+
+        val response = api.addStoryWithLocation("Bearer $token", multipartBody, descBody, latBody, lonBody)
+        return !response.error
+    }
+
+    private fun StoryItem.toDomain(): Story {
+        return Story(
+            id = id,
+            name = name,
+            description = description,
+            photoUrl = photoUrl,
+            createdAt = createdAt,
+            lat = lat,
+            lon = lon
+        )
     }
 }

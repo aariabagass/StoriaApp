@@ -30,4 +30,23 @@ class AddStoryViewModel(
                 }
         }
     }
+
+    fun uploadStoryWithLocation(
+        token: String,
+        description: String,
+        photoFile: File,
+        lat: Double,
+        lon: Double
+    ) {
+        viewModelScope.launch {
+            _uploadResult.postValue(ResultState.Loading)
+            homeUseCase.addStoryWithLocation(token, description, photoFile.path, lat, lon)
+                .catch { e ->
+                    _uploadResult.postValue(ResultState.Error(ApiErrorHandler.getErrorMessage(e)))
+                }
+                .collect { success ->
+                    _uploadResult.postValue(ResultState.Success(success))
+                }
+        }
+    }
 }

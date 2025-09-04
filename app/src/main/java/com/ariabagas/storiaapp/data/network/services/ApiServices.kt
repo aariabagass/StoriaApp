@@ -31,6 +31,13 @@ interface ApiService {
     ): LoginResponse
 
     @GET("stories")
+    suspend fun getStoriesWithLocation(
+        @Header("Authorization") token: String,
+        @Query("location") location: Int = 1,
+        @Query("size") size: Int = 20
+    ): StoriesResponse
+
+    @GET("stories")
     suspend fun getStories(
         @Header("Authorization") token: String,
         @Query("page") page: Int = 1,
@@ -50,5 +57,15 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Part photo: MultipartBody.Part,
         @Part("description") description: RequestBody
+    ): AddStoryResponse
+
+    @Multipart
+    @POST("stories")
+    suspend fun addStoryWithLocation(
+        @Header("Authorization") token: String,
+        @Part photo: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: RequestBody? = null,
+        @Part("lon") lon: RequestBody? = null
     ): AddStoryResponse
 }
