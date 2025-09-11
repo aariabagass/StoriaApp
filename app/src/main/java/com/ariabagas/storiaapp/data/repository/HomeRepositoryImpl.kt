@@ -1,5 +1,6 @@
 package com.ariabagas.storiaapp.data.repository
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.ariabagas.storiaapp.core.model.Story
@@ -7,21 +8,36 @@ import com.ariabagas.storiaapp.core.repository.HomeRepository
 import com.ariabagas.storiaapp.data.network.services.ApiService
 import kotlinx.coroutines.flow.Flow
 import androidx.paging.PagingData
-import com.ariabagas.storiaapp.data.network.StoryPagingSource
+import com.ariabagas.storiaapp.data.local.room.AppDatabase
 import com.ariabagas.storiaapp.data.network.responses.StoryItem
+import com.ariabagas.storiaapp.data.remote.StoryRemoteMediator
 import com.ariabagas.storiaapp.utils.reduceFileImage
+import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import androidx.paging.map
+import com.ariabagas.storiaapp.data.local.room.entity.toDomain
 
-class HomeRepositoryImpl(private val api: ApiService) : HomeRepository {
+class HomeRepositoryImpl(
+    private val api: ApiService,
+    private val database: AppDatabase
+) : HomeRepository {
+
+    @OptIn(ExperimentalPagingApi::class)
     override fun getStories(token: String): Flow<PagingData<Story>> {
+        val pagingSourceFactory = { database.storyDao().getAllStories() }
         return Pager(
-            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
-            pagingSourceFactory = { StoryPagingSource(api, token) }
-        ).flow
+            config = PagingConfig(
+                pageSize = 10,
+            ),
+            remoteMediator = StoryRemoteMediator(database, api, token),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow.map { pagingData ->
+            pagingData.map { it.toDomain() }
+        }
     }
 
     override suspend fun getStoriesWithLocation(token: String): Result<List<Story>> {

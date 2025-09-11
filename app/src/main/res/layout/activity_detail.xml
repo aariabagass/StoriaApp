@@ -4,44 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <ImageView
-        android:id="@+id/ivStory"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="32dp"
-        android:scaleType="centerCrop"
-        android:transitionName="photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
+    android:paddingTop="16dp">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
         android:textSize="18sp"
         android:textStyle="bold"
         android:transitionName="name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivStory"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Sample Name" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivStory"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        android:transitionName="photo"
+        app:layout_constraintEnd_toEndOf="@+id/tvName"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.StoriaApp.Large"
+        tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/tvDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:paddingTop="4dp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="14sp"
         android:transitionName="description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvName"
+        app:layout_constraintEnd_toEndOf="@+id/ivStory"
+        app:layout_constraintStart_toStartOf="@+id/ivStory"
+        app:layout_constraintTop_toBottomOf="@+id/ivStory"
         tools:text="This is a description preview" />
-
 
     <ProgressBar
         android:id="@+id/progress_bar"

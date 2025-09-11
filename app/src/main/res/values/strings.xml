@@ -7,4 +7,6 @@
     <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu.</string>
     <string name="pass_req">Password must be at least 8 characters</string>
     <string name="share_my_location">Share my location</string>
+    <string name="retry">retry</string>
+    <string name="invalid_email_format">Invalid email format">Invalid email format</string>
 </resources>

@@ -17,7 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        //CHECK MANIFEST FOR MAP KEY
+        //CHECK MANIFEST FOR G-MAP KEY
         buildConfigField("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
     }
 
@@ -67,13 +67,14 @@ dependencies {
     implementation(libs.camera.lifecycle)           // CameraX lifecycle-aware
     implementation(libs.camera.view)                // CameraX preview/view
     implementation(libs.swiperefresh)               // Pull-to-refresh
-    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.core.splashscreen) // Splash
 
     // --- Room (Local Database) ---
     implementation(libs.room.runtime)               // Room runtime
     ksp(libs.room.compiler)                         // Annotation processor (KSP)
     androidTestImplementation(libs.room.testing)    // Room testing utilities
     implementation(libs.androidx.room.ktx)          // Kotlin extensions for Room
+    implementation(libs.androidx.room.paging)       // Room Paging
 
     // --- Networking (Retrofit + Moshi + OkHttp) ---
     implementation(libs.retrofit)                   // Retrofit HTTP client
@@ -100,10 +101,21 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
 
-    // --- Testing ---
-    testImplementation(libs.junit)                  // Unit testing
-    androidTestImplementation(libs.androidx.junit)  // AndroidX JUnit extensions
-    androidTestImplementation(libs.androidx.espresso.core) // UI testing
+    // --- Unit testing (local JVM) ---
+    testImplementation(libs.junit)
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockito.kotlin)
+
+    // --- Instrumentation tests (Android device/emulator) ---
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.espresso.idling.resource)
+    androidTestImplementation (libs.androidx.espresso.intents)
+    androidTestImplementation (libs.androidx.espresso.contrib)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 }
 
 

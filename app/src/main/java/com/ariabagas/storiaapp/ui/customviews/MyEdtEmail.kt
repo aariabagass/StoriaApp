@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import android.util.Patterns
+import com.ariabagas.storiaapp.R
 import com.google.android.material.textfield.TextInputLayout
 
 
@@ -21,7 +22,7 @@ class MyEdtEmail(context: Context, attrs: AttributeSet) : AppCompatEditText(cont
                 val parentLayout = parent.parent
                 if (parentLayout is TextInputLayout) {
                     if (email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                        parentLayout.error = "Invalid email format"
+                        parentLayout.error = context.getString(R.string.invalid_email_format)
                     } else {
                         parentLayout.error = null
                     }

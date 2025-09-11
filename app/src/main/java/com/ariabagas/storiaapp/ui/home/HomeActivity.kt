@@ -17,6 +17,9 @@ import com.ariabagas.storiaapp.data.local.datastore.UserPreference
 import com.ariabagas.storiaapp.ui.welcome.LoginActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,24 +31,18 @@ class HomeActivity : ComponentActivity() {
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var adapter: StoryAdapter
 
+    private var shouldScrollToTop = true
+
+    private var scrollJob: Job? = null
+
     private val launcherAddStory = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            adapter.refresh()
-            lifecycleScope.launch {
-                adapter.loadStateFlow.collect { loadStates ->
-                    if (loadStates.refresh.endOfPaginationReached.not() ||
-                        loadStates.refresh is androidx.paging.LoadState.NotLoading
-                    ) {
-                        binding.recyclerView.scrollToPosition(0)
-                        return@collect
-                    }
-                }
-            }
+            shouldScrollToTop = true
+            viewModel.refreshStories()
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,10 +62,13 @@ class HomeActivity : ComponentActivity() {
 
         adapter = StoryAdapter()
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter { adapter.retry() }
+        )
 
         binding.swipeRefresh.setOnRefreshListener {
-            adapter.refresh()
+            shouldScrollToTop = true
+            viewModel.refreshStories()
         }
 
         adapter.onItemClick = { story, imgPhoto, tvName, tvDesc ->
@@ -86,13 +86,20 @@ class HomeActivity : ComponentActivity() {
         }
 
         lifecycleScope.launch {
-            adapter.loadStateFlow.collect { loadStates ->
-                binding.swipeRefresh.isRefreshing =
-                    loadStates.refresh is androidx.paging.LoadState.Loading
-                val isNotLoading = loadStates.refresh is androidx.paging.LoadState.NotLoading
-                val hasItems = adapter.itemCount > 0
-                if (isNotLoading && hasItems) {
-                    binding.recyclerView.scrollToPosition(0)
+            adapter.loadStateFlow.collectLatest { loadStates ->
+                val isLoading = loadStates.refresh is androidx.paging.LoadState.Loading
+                binding.swipeRefresh.isRefreshing = isLoading
+
+                if (loadStates.refresh is androidx.paging.LoadState.NotLoading && shouldScrollToTop) {
+                    shouldScrollToTop = false
+
+                    scrollJob?.cancel()
+                    scrollJob = lifecycleScope.launch {
+                        delay(1000L)
+                        binding.recyclerView.post {
+                            binding.recyclerView.scrollToPosition(0)
+                        }
+                    }
                 }
             }
         }
@@ -100,8 +107,8 @@ class HomeActivity : ComponentActivity() {
         lifecycleScope.launch {
             prefs.tokenFlow().collect { token ->
                 if (!token.isNullOrBlank()) {
-                    viewModel.getStories(token).collect { pagingData ->
-                        adapter.submitData(pagingData)
+                    viewModel.getStories(token).observe(this@HomeActivity) { pagingData ->
+                        adapter.submitData(lifecycle, pagingData)
                     }
                 }
             }
@@ -127,12 +134,16 @@ class HomeActivity : ComponentActivity() {
             launcherAddStory.launch(intent)
         }
 
-        val callback = object : OnBackPressedCallback(true) {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 finishAffinity()
             }
-        }
-        onBackPressedDispatcher.addCallback(this, callback)
+        })
+    }
+
+    override fun onDestroy() {
+        scrollJob?.cancel()
+        super.onDestroy()
     }
 }
 

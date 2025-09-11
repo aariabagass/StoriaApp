@@ -12,6 +12,7 @@ import com.ariabagas.storiaapp.databinding.ActivityDetailBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.ariabagas.storiaapp.data.local.datastore.UserPreference
+import com.ariabagas.storiaapp.utils.NotifUtils
 import com.ariabagas.storiaapp.utils.ResultState
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
@@ -65,6 +66,7 @@ class DetailActivity : ComponentActivity() {
                 is ResultState.Error -> {
                     showLoading(false)
                     showToast("Failed: ${result.message}")
+                    NotifUtils.show(this, "Please check your Internet Connection", isError = true)
                 }
             }
         }
